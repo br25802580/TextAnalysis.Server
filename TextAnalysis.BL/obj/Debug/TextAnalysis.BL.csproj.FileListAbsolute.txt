@@ -1,0 +1,7 @@
+D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.BL.dll
+D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.BL.pdb
+D:\TextAnalysis\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.csprojResolveAssemblyReference.cache
+D:\TextAnalysis\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.dll
+D:\TextAnalysis\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.pdb
+D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.dll
+D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.pdb
