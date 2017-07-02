@@ -25,7 +25,7 @@ namespace TextAnalysis.BL
 
             AddStopSignConfiguration(StopSignConfigurations, new DotConfigurationFactory());
             AddStopSignConfiguration(StopSignConfigurations, new QuestionMarkConfigurationFactory());
-            StopSignConfigurations.Add(':', null);
+            StopSignConfigurations.Add(Consts.EXCLAMATION_MARK_SIGN, null);
 
             return configuration;
         }

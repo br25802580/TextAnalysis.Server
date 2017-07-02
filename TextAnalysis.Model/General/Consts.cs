@@ -11,6 +11,7 @@ namespace TextAnalysis.Model
         public const char DOT_SIGN = '.';
         public const char QUESTION_MARK_SIGN = '?';
         public const char SPACE_SIGN = ' ';
+        public const char EXCLAMATION_MARK_SIGN = '!';
         public const string NEW_LINE = "\n";
         public const string NEW_LINE_RIGHT = "\r\n";
     }

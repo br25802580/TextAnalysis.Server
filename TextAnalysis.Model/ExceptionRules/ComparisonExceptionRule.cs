@@ -7,37 +7,67 @@ using System.Threading.Tasks;
 
 namespace TextAnalysis.Model
 {
+    /// <summary>
+    /// Rule for comparing an input word with any of reserved words list.
+    /// if a match found- the input word is Exceptional and not the end of the sentence.
+    /// </summary>
     public class ComparisonExceptionRule : StopSignExceptionRule
     {
-        public virtual IList<string> Words { get;set; }
+        #region Properties
 
+        /// <summary>
+        /// Words to compare current input word with these. 
+        /// </summary>
+        public virtual IList<string> ReservedWords { get; set; }
+
+        #endregion Properties
+
+        #region VirtualMethods
+
+        /// <summary>
+        /// Find whether current input word is matched to this exception rule.
+        /// Check if current word start with any of certain words.
+        /// </summary>
+        /// <param name="processContext">A processing context which lives until the process is finished, 
+        /// and stores data for the process</param>
+        /// <returns></returns>
         public override bool IsMatch(AnalysisProcessContext processContext)
         {
             bool isMatch = false;
             string word = processContext.Word;
             char sign = processContext.Sign;
 
-            string wordFound = Words?.FirstOrDefault(_shortcut => word.StartsWith(_shortcut));
+            string wordFound = ReservedWords?.FirstOrDefault(_shortcut => word.StartsWith(_shortcut));
 
             if (!string.IsNullOrEmpty(wordFound))
             {
                 isMatch = true;
-                AfterWordFound(processContext, wordFound);
+                AddSeparatorSpaceIfNecessary(processContext, wordFound);
             }
 
             return isMatch;
         }
 
-        protected virtual void AfterWordFound(AnalysisProcessContext processContext, string matchedWord)
+        /// <summary>
+        /// Find whether to add a space after the word location which has been found
+        /// </summary>
+        /// <param name="processContext">A processing context which lives until the process is finished, 
+        /// and stores data for the process</param>
+        /// <param name="matchedWord"></param>
+        protected virtual void AddSeparatorSpaceIfNecessary(AnalysisProcessContext processContext, string matchedWord)
         {
             string word = processContext.Word;
 
             if (!word.Equals(matchedWord))
             {
                 int matchedWordCount = matchedWord.Count();
-                processContext.Output.SeperateWordAtIndex = matchedWordCount - processContext.StopSignIndexIntoWord - 1;
+                processContext.Output.AddSpaceAtIndex = matchedWordCount - processContext.StopSignIndexIntoWord - 1;
             }
         }
+
+        #endregion VirtualMethods
+
+        #region Ctor
 
         public ComparisonExceptionRule()
         {
@@ -45,7 +75,9 @@ namespace TextAnalysis.Model
 
         public ComparisonExceptionRule(IList<string> words)
         {
-            Words = words;
+            ReservedWords = words;
         }
+
+        #endregion Ctor
     }
 }

@@ -1,0 +1,5 @@
+
+TextAnalysis.Model/obj/Debug/TextAnalysis.Model.csproj.FileListAbsolute.txt
+*.txt
+packages/Microsoft.AspNet.WebApi.HelpPage.5.2.3/Content/Areas/HelpPage/Views/Web.config
+*.config

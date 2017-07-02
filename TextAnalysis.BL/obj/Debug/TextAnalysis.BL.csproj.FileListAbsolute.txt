@@ -5,3 +5,10 @@ D:\TextAnalysis\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.dll
 D:\TextAnalysis\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.pdb
 D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.dll
 D:\TextAnalysis\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\bin\Debug\TextAnalysis.BL.dll
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\bin\Debug\TextAnalysis.BL.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.dll
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\bin\Debug\TextAnalysis.Model.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.dll
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.BL\obj\Debug\TextAnalysis.BL.csprojResolveAssemblyReference.cache

@@ -8,8 +8,8 @@ namespace TextAnalysis.Model
 {
     public class ProcessContextResult
     {
-        public int? StopSignIndexGap { get; set; }
-        public int? SeperateWordAtIndex { get; set; }
+        public int? WordCompleteSentenceAtIndex { get; set; }
+        public int? AddSpaceAtIndex { get; set; }
         public IList<string> SentenceListResult { get; set; }
 
         public ProcessContextResult()

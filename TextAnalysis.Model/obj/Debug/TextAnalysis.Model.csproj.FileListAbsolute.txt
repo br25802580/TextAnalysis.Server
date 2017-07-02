@@ -3,3 +3,8 @@ D:\TextAnalysis\TextAnalysis.Model\bin\Debug\TextAnalysis.Model.pdb
 D:\TextAnalysis\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.csprojResolveAssemblyReference.cache
 D:\TextAnalysis\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.dll
 D:\TextAnalysis\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.Model\bin\Debug\TextAnalysis.Model.dll
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.Model\bin\Debug\TextAnalysis.Model.pdb
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.csprojResolveAssemblyReference.cache
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.dll
+C:\Users\brachar\TextAnalysis.Server\TextAnalysis.Model\obj\Debug\TextAnalysis.Model.pdb

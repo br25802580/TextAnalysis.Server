@@ -40,8 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\AnalysisGeneralSettings.cs" />
-    <Compile Include="Configuration\StopSignGeneralSettings.cs" />
     <Compile Include="General\Consts.cs" />
     <Compile Include="ExceptionRules\ComparisonExceptionRule.cs" />
     <Compile Include="ExceptionRules\RegexExceptionRule.cs" />

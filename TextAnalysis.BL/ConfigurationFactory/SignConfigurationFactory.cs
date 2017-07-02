@@ -23,7 +23,6 @@ namespace TextAnalysis.BL
         public StopSignConfiguration CreateSignConfiguration()
         {
             StopSignConfiguration configuation = new StopSignConfiguration();
-            StopSignGeneralSettings generalSettings = configuation.GeneralSettings;
 
             configuation.Sign = Sign;
             configuation.Exceptions = GetExceptions();

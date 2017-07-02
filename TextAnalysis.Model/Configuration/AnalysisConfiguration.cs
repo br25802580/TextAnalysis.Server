@@ -10,16 +10,17 @@ namespace TextAnalysis.Model
     {
         public IDictionary<char, StopSignConfiguration> StopSignConfigurations { get; set; }
 
-        public AnalysisGeneralSettings GeneralSettings { get; set; }
-
         public ICollection<char> Signs
         {
             get { return StopSignConfigurations?.Keys; }
         }
 
+        public bool EnableLinebreakSeperator { get; set; }
+        public int? MaxShortcutLength { get; set; }
+
         public AnalysisConfiguration()
         {
-            GeneralSettings = new AnalysisGeneralSettings();
+            EnableLinebreakSeperator = true;
             StopSignConfigurations = new Dictionary<Char, StopSignConfiguration>();
         }
     }

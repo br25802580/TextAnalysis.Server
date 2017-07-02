@@ -8,7 +8,7 @@ using TextAnalysis.Model;
 namespace TextAnalysis.BL
 {
     /// <summary>
-    /// Business logic for process an input string, and seperate it to multi sentences
+    /// Business logic for process an input string, and seperate it into multi sentences
     /// </summary>
     public class ProcessBL
     {
@@ -27,7 +27,7 @@ namespace TextAnalysis.BL
             processContext.AnalysisConfiguration = analysisConfiguration;
 
             //If enter key (\n or \r\n) declared as seperator- We seperate input text to segments 
-            if (analysisConfiguration.GeneralSettings.EnableEnterSeperator)
+            if (analysisConfiguration.EnableLinebreakSeperator)
             {
                 IList<string> segments = GetTextSegments(text);
 
@@ -111,11 +111,14 @@ namespace TextAnalysis.BL
             //If stop sign has found into sentence
             if (stopIndex > -1)
             {
+                stopIndex++;
+                //Find index after consecutive characters of a certain type
+                stopIndex = FindIndexAfterConsecutiveChars(text, stopIndex, processContext.Sign);
                 //Set currentSentence member with substring from text beginning till stopIndex
-                currentSentence = text.Substring(0, stopIndex + 1);
+                currentSentence = text.Substring(0, stopIndex);
 
                 //Remove the found sentence from the total text
-                text = processContext.AllText.Remove(0, stopIndex + 1).TrimStart();
+                text = processContext.AllText.Remove(0, stopIndex ).TrimStart();
             }
             //If stop sign has not found into sentence
             else
@@ -130,6 +133,21 @@ namespace TextAnalysis.BL
             processContext.AllText = text;
 
             return currentSentence;
+        }
+
+        /// <summary>
+        /// Find index after consecutive characters of a certain type
+        /// </summary>
+        /// <param name="text">Text to search within it</param>
+        /// <param name="startIndex">Index from which to start the search</param>
+        /// <param name="sign">A character which needs to be found</param>
+        /// <returns></returns>
+        private int FindIndexAfterConsecutiveChars(String text, int startIndex, char sign)
+        {
+      
+            for (; startIndex < text.Count()  && text[startIndex] == sign; startIndex++) ;
+
+            return startIndex;
         }
 
         /// <summary>
@@ -169,10 +187,10 @@ namespace TextAnalysis.BL
                 if (!stopSignCompleteSentenceFound)
                     HandleOutputContext(processContext, ref stopIndex, ref startIndex, ref stopSignCompleteSentenceFound, ref text);
             }
-
-            //If no closing sign found- Athe whole remaining text is a new sentence
+            //If no closing sign found- The entire remaining text is an additional sentence
             else
             {
+                stopIndex--;
                 stopSignCompleteSentenceFound = true;
             }
 
@@ -180,7 +198,7 @@ namespace TextAnalysis.BL
         }
 
         /// <summary>
-        /// Update neccessary dadta due to processContext output
+        /// Update neccessary data due to processContext output
         /// </summary>
         /// <param name="processContext">A processing context which lives until the process is finished, 
         /// and stores data for the process</param>
@@ -191,31 +209,32 @@ namespace TextAnalysis.BL
         private static void HandleOutputContext(AnalysisProcessContext processContext, ref int stopIndex, ref int startIndex, ref bool stopSignCompleteSentenceFound, ref string text)
         {
 
-            int? stopSignIndexGap = processContext.Output.StopSignIndexGap;
+            int? wordCompleteSentenceAtIndex = processContext.Output.WordCompleteSentenceAtIndex;
 
             //If stop sign which complete sentence was found in a specifix index gap-
-            if (stopSignIndexGap.HasValue)
+            if (wordCompleteSentenceAtIndex.HasValue)
             {
-                //Set correct stop index, and assign stopIndexFound to true
+                //Assign stopIndexFound to true
                 stopSignCompleteSentenceFound = true;
-                stopIndex = stopIndex + stopSignIndexGap.Value;
-                processContext.Output.StopSignIndexGap = null;
+                //Set correct stop index by index into text + new stop index into word - original stop index into word
+                stopIndex = stopIndex + wordCompleteSentenceAtIndex.Value - processContext.StopSignIndexIntoWord;
+                processContext.Output.WordCompleteSentenceAtIndex = null;
             }
             else
                 //If stopSignIndexGap is empty - Set startIndex to the following char of stopIndex variable
                 startIndex = stopIndex + 1;
 
-            int? seperateWordAtIndex = processContext.Output.SeperateWordAtIndex;
+            int? seperateWordAtIndex = processContext.Output.AddSpaceAtIndex;
 
             //If there is a need to add a space separator within the text
             if (seperateWordAtIndex.HasValue)
             {
                 //Insert space at a specific index into text 
                 startIndex = stopIndex + seperateWordAtIndex.Value + 1;
-                text = text.Insert(startIndex, " ");
+                text = text.Insert(startIndex, Consts.SPACE_SIGN.ToString());
                 processContext.AllText = text;
 
-                processContext.Output.SeperateWordAtIndex = null;
+                processContext.Output.AddSpaceAtIndex = null;
             }
         }
 
@@ -313,7 +332,7 @@ namespace TextAnalysis.BL
             }
 
             if (nextSpaceIndex == -1)
-                nextSpaceIndex = text.Count() - 1;
+                nextSpaceIndex = text.Count();
 
             //Get word by prevSpaceIndex and nextSpaceIndex
             wordMetadata.Word = text.Substring(prevSpaceIndex, nextSpaceIndex - prevSpaceIndex);
